@@ -1,7 +1,13 @@
 {{ define "main" }}
 <section class="section">
   <div class="container">
-    <h1 class="title">{{ .Site.Title }}</h1>
+    <h1 class="title is-1">{{ .Site.Title }}</h1>
   </div>
+</section>
+
+{{- partial "banner.html" . -}}
+
+<section class="section">
+  <div class="container content">{{ .Content }}</div>
 </section>
 {{ end }}

@@ -1,5 +1,6 @@
+{{ if .PublishDate }}
+<!--  -->
 {{ $dateTime := .PublishDate.Format "2006-01-02" }}
-
 <!--  -->
 {{ $dateFormat :=.Site.Params.dateFormat | default "Jan 2, 2006" }}
 
@@ -8,14 +9,10 @@
     {{ .PublishDate.Format $dateFormat }}
   </time>
 </h3>
-
+{{ end }} {{ if .Params.tags }}
 <p>
   {{ with .Params.tags }} {{ range . }} {{ $href := print (absURL "tags/")
   (urlize .) }} <a class="tag is-primary" href="{{ $href }}">{{ . }}</a>
+  {{ end }} {{ end }}
 </p>
-
-<!--  -->
-{{ end }}
-
-<!--  -->
 {{ end }}

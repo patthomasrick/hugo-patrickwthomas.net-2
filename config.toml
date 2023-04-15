@@ -17,3 +17,11 @@ sectionPagesMenu = 'main'
         name = "Contact"
         url = "/contact/"
         weight = 3
+
+[params]
+    [[params.social]]
+        name = "twitter"
+        url = "https://twitter.com/username"
+    [[params.social]]
+        name = "github"
+        url = "https://github.com/username"

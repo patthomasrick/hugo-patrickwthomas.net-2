@@ -49,9 +49,9 @@ jobs:
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Install theme dependencies
-        run: "cd theme/bauxite && npm install"
+        run: "cd themes/bauxite && npm ci"
       - name: Build theme
-        run: "cd theme/bauxite && npm run sass"
+        run: "cd themes/bauxite && npm run build"
       - name: Build with Hugo
         env:
           # For maximum backward compatibility with Hugo modules
