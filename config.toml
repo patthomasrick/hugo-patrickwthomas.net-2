@@ -1,6 +1,6 @@
-baseURL = '/'
+baseURL = 'https://dev.patrickwthomas.net/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = "Hi, I'm Patrick"
 theme = 'bauxite'
 sectionPagesMenu = 'main'
 
