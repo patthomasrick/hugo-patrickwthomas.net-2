@@ -1,0 +1,10 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container content">
+    <h2 class="title">{{ .Title }}</h2>
+    {{ partial "metadata.html" . }}
+    <br /><br />
+    {{ .Content }}
+  </div>
+</section>
+{{ end }}

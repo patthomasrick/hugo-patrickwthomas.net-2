@@ -1,0 +1,17 @@
+{
+  "name": "bauxite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass-watch": "sass --watch style/style.scss:static/css/style.css --style compressed",
+    "sass": "sass style/style.scss:static/css/style.css --style compressed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bulma": "^0.9.4",
+    "sass": "^1.62.0"
+  }
+}
