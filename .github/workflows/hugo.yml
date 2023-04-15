@@ -51,7 +51,7 @@ jobs:
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Install theme dependencies
-        run: "cd themes/bauxite && pnpm ci"
+        run: "cd themes/bauxite && pnpm install"
       - name: Build theme
         run: "cd themes/bauxite && pnpm run build"
       - name: Build with Hugo
