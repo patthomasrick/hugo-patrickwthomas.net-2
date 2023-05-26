@@ -6,8 +6,6 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                cleanWs()
-
                 sh '''
                 apt-get update
                 apt-get install -fy hugo
