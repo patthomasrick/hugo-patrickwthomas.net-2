@@ -17,7 +17,7 @@ pipeline {
             steps {
                 // // Get some code from a GitHub repository
                 // git 'https://github.com/jglick/simple-maven-project-with-tests.git'
-                git 'git@github.com:patthomasrick/hugo-patrickwthomas.net-2.git'
+                // git 'git@github.com:patthomasrick/hugo-patrickwthomas.net-2.git'
 
                 // // Run Maven on a Unix agent.
                 // sh "mvn -Dmaven.test.failure.ignore=true clean package"
