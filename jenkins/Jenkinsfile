@@ -1,0 +1,41 @@
+pipeline {
+    agent {
+        docker { image 'node:20' }
+    }
+
+    stages {
+        stage('Setup') {
+            steps {
+                sh '''
+                wget -q https://github.com/gohugoio/hugo/releases/download/v0.112.3/hugo_extended_0.112.3_linux-amd64.deb -O /tmp/hugo.deb
+                dpkg -i /tmp/hugo.deb
+
+                apt update
+                apt install -y zip
+                '''
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh '''
+                cd themes/bauxite
+                npm install
+                npm run build
+                cd ../..
+                '''
+
+                sh '''
+                hugo --gc --minify
+                zip -r public.zip public
+                '''
+            }
+
+            post {
+                success {
+                    archiveArtifacts 'public.zip'
+                }
+            }
+        }
+    }
+}
