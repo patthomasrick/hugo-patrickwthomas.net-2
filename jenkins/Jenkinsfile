@@ -27,7 +27,7 @@ pipeline {
 
                 sh '''
                 hugo --gc --minify
-                zip -r public.zip
+                zip -r public.zip public
                 '''
             }
 
