@@ -5,12 +5,14 @@ pipeline {
 
     stages {
         stage('Setup') {
-            cleanWs()
+            steps {
+                cleanWs()
 
-            sh '''
-            apt-get update
-            apt-get install -fy hugo
-            '''
+                sh '''
+                apt-get update
+                apt-get install -fy hugo
+                '''
+            }
         }
 
         stage('Build') {
