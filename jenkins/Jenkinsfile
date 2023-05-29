@@ -13,8 +13,7 @@ pipeline {
                 apt update
                 apt install -y zip
 
-                curl -fsSL https://get.pnpm.io/install.sh | sh -
-                pnpm install
+                npm install -g pnpm
 
                 cd themes/bauxite
                 pnpm install
@@ -32,7 +31,7 @@ pipeline {
                 pnpm run build
                 cd ../..
                 '''
-                
+
                 sh '''
                 cd themes/bauxite
                 npm install
