@@ -9,7 +9,12 @@ pipeline {
                 checkout scmGit(
                     branches: [[name: env.BRANCH_NAME]],
                     browser: github('https://github.com/patthomasrick/hugo-patrickwthomas.net-2'),
-                    extensions: [submodule(recursiveSubmodules: true, reference: '')],
+                    extensions: [submodule(
+                        recursiveSubmodules: true,
+                        reference: '',
+                        shallow: true,
+                        trackingSubmodules: true
+                    )],
                     userRemoteConfigs: [
                         [
                             credentialsId: 'github-hugo-patrickwthomas.net-2',
