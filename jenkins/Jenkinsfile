@@ -6,6 +6,8 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
+                checkout scmGit(branches: [[name: env.BRANCH]], browser: github('https://github.com/patthomasrick/hugo-patrickwthomas.net-2'), extensions: [submodule(recursiveSubmodules: true, reference: '')], userRemoteConfigs: [[credentialsId: 'github-hugo-patrickwthomas.net-2', url: 'git@github.com:patthomasrick/hugo-patrickwthomas.net-2.git']])
+
                 sh '''
                 wget -q https://github.com/gohugoio/hugo/releases/download/v0.112.3/hugo_extended_0.112.3_linux-amd64.deb -O /tmp/hugo.deb
                 dpkg -i /tmp/hugo.deb
@@ -18,15 +20,7 @@ pipeline {
                 cd themes/bauxite
                 pnpm install
                 cd ../..
-
-                git submodule update --init --recursive
                 '''
-
-                withCredentials([gitUsernamePassword(credentialsId: 'vern-jenkins', gitToolName: 'Default')]) {
-                    sh """
-                    git submodule update --init --recursive
-                    """
-                }
             }
         }
 
