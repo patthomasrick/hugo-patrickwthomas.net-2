@@ -26,30 +26,26 @@ pipeline {
         }
 
         stage('Build') {
-            stage('Theme') {
-                steps {
-                    sh '''
-                    cd themes/bauxite
-                    pnpm run build
-                    cd ../..
-                    '''
-                }
+            steps {
+                sh '''
+                cd themes/bauxite
+                pnpm run build
+                cd ../..
+                '''
             }
+            
+            steps {
+                sh '''
+                cd themes/bauxite
+                npm install
+                npm run build
+                cd ../..
+                '''
 
-            stage('Site') {
-                steps {
-                    sh '''
-                    cd themes/bauxite
-                    npm install
-                    npm run build
-                    cd ../..
-                    '''
-
-                    sh '''
-                    hugo --gc --minify
-                    zip -r public.zip public
-                    '''
-                }
+                sh '''
+                hugo --gc --minify
+                zip -r public.zip public
+                '''
             }
 
             post {
