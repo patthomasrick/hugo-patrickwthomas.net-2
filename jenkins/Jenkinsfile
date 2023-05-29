@@ -45,13 +45,11 @@ pipeline {
 
                 sh '''
                 cd themes/bauxite
-                npm install
-                npm run build
+                pnpm run build
                 cd ../..
                 '''
 
                 sh '''
-                hugo --gc --minify
                 zip -r public.zip public
                 '''
             }
