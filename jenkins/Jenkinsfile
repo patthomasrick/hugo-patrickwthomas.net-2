@@ -70,15 +70,8 @@ pipeline {
             }
             steps {
                 withCredentials([string(credentialsId: 'cloudflare-workers-patrickwthomas.net', variable: 'CLOUDFLARE_API_TOKEN')]) {
-                    script {
-                        if (env.BRANCH_NAME == 'main') {
-                            env.CLOUDFLARE_BRANCH = 'production'
-                        } else {
-                            env.CLOUDFLARE_BRANCH = env.BRANCH_NAME
-                        }
-                    }
                     sh """
-                    wrangler pages deploy ./public --project-name hugo-patrickwthomasnet-2 --branch "${env.CLOUDFLARE_BRANCH}"
+                    wrangler pages deploy ./public --project-name hugo-patrickwthomasnet-2 --branch "${env.BRANCH_NAME}"
                     """
                 }
             }
