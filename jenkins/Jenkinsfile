@@ -7,12 +7,12 @@ pipeline {
         stage('Setup') {
             steps {
                 checkout scmGit(
-                    branches: [[name: env.BRANCH_NAME]], 
-                    browser: github('https://github.com/patthomasrick/hugo-patrickwthomas.net-2'), 
-                    extensions: [submodule(recursiveSubmodules: true, reference: '')], 
+                    branches: [[name: env.BRANCH_NAME]],
+                    browser: github('https://github.com/patthomasrick/hugo-patrickwthomas.net-2'),
+                    extensions: [submodule(recursiveSubmodules: true, reference: '')],
                     userRemoteConfigs: [
                         [
-                            credentialsId: 'github-hugo-patrickwthomas.net-2', 
+                            credentialsId: 'github-hugo-patrickwthomas.net-2',
                             url: 'git@github.com:patthomasrick/hugo-patrickwthomas.net-2.git'
                         ]
                     ]
@@ -41,15 +41,9 @@ pipeline {
                 cd themes/bauxite
                 pnpm run build
                 cd ../..
-                '''
 
-                sh '''
-                cd themes/bauxite
                 pnpm run build
-                cd ../..
-                '''
 
-                sh '''
                 zip -r public.zip public
                 '''
             }
