@@ -21,6 +21,12 @@ pipeline {
 
                 git submodule update --init --recursive
                 '''
+
+                withCredentials([gitUsernamePassword(credentialsId: 'vern-jenkins', gitToolName: 'Default')]) {
+                    sh """
+                    git submodule update --init --recursive
+                    """
+                }
             }
         }
 
