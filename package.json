@@ -1,0 +1,14 @@
+{
+  "name": "hugo-patrickwthomas.net-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "docker run --rm -it -v $(pwd):/src klakegg/hugo:alpine",
+    "serve": "docker run --rm -it -v $(pwd):/src -p 1313:1313 klakegg/hugo:alpine server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
