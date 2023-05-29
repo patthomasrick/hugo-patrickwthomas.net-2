@@ -7,12 +7,12 @@ pipeline {
         stage('Setup') {
             steps {
                 checkout scmGit(
-                    branches: [[name: env.BRANCH_NAME]], 
-                    browser: github('https://github.com/patthomasrick/hugo-patrickwthomas.net-2'), 
-                    extensions: [submodule(recursiveSubmodules: true, reference: '')], 
+                    branches: [[name: env.BRANCH_NAME]],
+                    browser: github('https://github.com/patthomasrick/hugo-patrickwthomas.net-2'),
+                    extensions: [submodule(recursiveSubmodules: true, reference: '')],
                     userRemoteConfigs: [
                         [
-                            credentialsId: 'github-hugo-patrickwthomas.net-2', 
+                            credentialsId: 'github-hugo-patrickwthomas.net-2',
                             url: 'git@github.com:patthomasrick/hugo-patrickwthomas.net-2.git'
                         ]
                     ]
@@ -25,8 +25,9 @@ pipeline {
                 apt update
                 apt install -y zip
 
-                npm install -g pnpm
+                npm install -g pnpm wrangler
 
+                pnpm install
                 cd themes/bauxite
                 pnpm install
                 cd ../..
@@ -40,17 +41,9 @@ pipeline {
                 cd themes/bauxite
                 pnpm run build
                 cd ../..
-                '''
 
-                sh '''
-                cd themes/bauxite
-                npm install
-                npm run build
-                cd ../..
-                '''
+                pnpm run build:local
 
-                sh '''
-                hugo --gc --minify
                 zip -r public.zip public
                 '''
             }
@@ -58,6 +51,18 @@ pipeline {
             post {
                 success {
                     archiveArtifacts 'public.zip'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            // Only deploy if the branch is master
+            when { branch 'master' }
+            steps {
+                withCredentials([string(credentialsId: 'cloudflare-workers-patrickwthomas.net', variable: 'CLOUDFLARE_API_TOKEN')]) {
+                    sh '''
+                    wrangler pages deploy ./public --project-name hugo-patrickwthomasnet-2
+                    '''
                 }
             }
         }
