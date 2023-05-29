@@ -1,5 +1,10 @@
+@import "./fonts/source-sans/source-sans-3.css";
+@import "./fonts/source-serif/source-serif-variable.css";
+
 // Configure Bulma.
-$family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$family-sans-serif: "Source Sans 3", "Helvetica Neue", Helvetica, Arial,
+  sans-serif;
+$family-serif: "Source Serif VF", Georgia, Times, serif;
 $body-font-size: 18px;
 $body-line-height: 1.6;
 $container-max-width: 768px;
