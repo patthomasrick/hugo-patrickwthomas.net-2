@@ -32,9 +32,7 @@ pipeline {
                 pnpm run build
                 cd ../..
                 '''
-            }
-            
-            steps {
+                
                 sh '''
                 cd themes/bauxite
                 npm install
