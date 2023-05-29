@@ -12,23 +12,44 @@ pipeline {
 
                 apt update
                 apt install -y zip
+
+                curl -fsSL https://get.pnpm.io/install.sh | sh -
+                pnpm install
+
+                cd themes/bauxite
+                pnpm install
+                cd ../..
+
+                git submodule update --init --recursive
                 '''
             }
         }
 
         stage('Build') {
-            steps {
-                sh '''
-                cd themes/bauxite
-                npm install
-                npm run build
-                cd ../..
-                '''
+            stage('Theme') {
+                steps {
+                    sh '''
+                    cd themes/bauxite
+                    pnpm run build
+                    cd ../..
+                    '''
+                }
+            }
 
-                sh '''
-                hugo --gc --minify
-                zip -r public.zip public
-                '''
+            stage('Site') {
+                steps {
+                    sh '''
+                    cd themes/bauxite
+                    npm install
+                    npm run build
+                    cd ../..
+                    '''
+
+                    sh '''
+                    hugo --gc --minify
+                    zip -r public.zip public
+                    '''
+                }
             }
 
             post {
