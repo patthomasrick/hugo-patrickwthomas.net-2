@@ -19,7 +19,7 @@ pipeline {
                 pnpm install
                 cd ../..
 
-                git pull --recurse-submodules
+                git submodule update --init --recursive
                 '''
             }
         }
