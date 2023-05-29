@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "docker run --rm -it -v $(pwd):/src klakegg/hugo:alpine",
-    "serve": "docker run --rm -it -v $(pwd):/src -p 1313:1313 klakegg/hugo:alpine server"
+    "serve": "docker run --rm -it -v $(pwd):/src -p 1313:1313 klakegg/hugo:alpine server",
+    "pages:dev": "wrangler pages dev --compatibility-date=2023-05-18 --proxy 5173 -- npm run dev",
+    "pages:deploy": "npm run build && wrangler pages publish ./public"
   },
   "keywords": [],
   "author": "",

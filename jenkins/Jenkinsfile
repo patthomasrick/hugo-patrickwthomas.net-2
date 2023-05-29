@@ -22,6 +22,8 @@ pipeline {
                 wget -q https://github.com/gohugoio/hugo/releases/download/v0.112.3/hugo_extended_0.112.3_linux-amd64.deb -O /tmp/hugo.deb
                 dpkg -i /tmp/hugo.deb
 
+                npm install -g wrangler
+
                 apt update
                 apt install -y zip
 
@@ -58,6 +60,18 @@ pipeline {
             post {
                 success {
                     archiveArtifacts 'public.zip'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            // Only deploy if the branch is master
+            when { branch 'master' }
+            steps {
+                withCredentials([string(credentialsId: 'cloudflare-workers-patrickwthomas.net', variable: 'CLOUDFLARE_API_TOKEN')]) {
+                    sh '''
+                    wrangler pages deploy ./public --project-name hugo-patrickwthomasnet-2
+                    '''
                 }
             }
         }
