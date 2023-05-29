@@ -56,8 +56,13 @@ pipeline {
         }
 
         stage('Deploy') {
-            // Only deploy if the branch is master
-            when { branch 'master' }
+            // Only deploy if the branch is main or develop
+            when {
+                anyOf {
+                    branch 'main'
+                    branch 'develop'
+                }
+            }
             steps {
                 withCredentials([string(credentialsId: 'cloudflare-workers-patrickwthomas.net', variable: 'CLOUDFLARE_API_TOKEN')]) {
                     sh '''
