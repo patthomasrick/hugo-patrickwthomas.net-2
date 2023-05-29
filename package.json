@@ -9,9 +9,13 @@
     "build": "docker run --rm -it -v $(pwd):/src klakegg/hugo:alpine --gc --minify",
     "serve": "docker run --rm -it -v $(pwd):/src -p 1313:1313 klakegg/hugo:alpine server",
     "pages:dev": "wrangler pages dev --compatibility-date=2023-05-18 --proxy 5173 -- npm run dev",
-    "pages:deploy": "npm run build && wrangler pages publish ./public"
+    "pages:deploy": "npm run build && wrangler pages publish ./public",
+    "format": "prettier --write . --ignore-path .gitignore --ignore-path .prettierignore"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "prettier": "^2.8.8"
+  }
 }
